@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: authservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: go-ems-authservice
+  template:
+    metadata:
+      labels:
+        component: go-ems-authservice
+    spec:
+      containers:
+        - name: go-ems-authservice
+          image: yashjindal28/go-ems-authservice
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_URL
+              value: mongo-cluster-ip-service:27017

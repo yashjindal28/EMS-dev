@@ -1,0 +1,55 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - #host: ems-prod.info
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: angular-frontend-cluster-ip-service
+                port:
+                  number: 4201
+          - path: /authApi/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: authservice-cluster-ip-service
+                port:
+                  number: 8080
+          - path: /empApi/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: employee-cluster-ip-service
+                port:
+                  number: 84
+          - path: /dptApi/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: department-cluster-ip-service
+                port:
+                  number: 83
+          - path: /leaveApi/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: leave-cluster-ip-service
+                port:
+                  number: 82
+          - path: /payrollApi/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: payroll-cluster-ip-service
+                port:
+                  number: 81

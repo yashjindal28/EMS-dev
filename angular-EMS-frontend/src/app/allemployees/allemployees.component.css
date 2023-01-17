@@ -1,0 +1,26 @@
+i {
+    font-size: 16px;
+    margin-left: -25px;
+    cursor: pointer;
+  }
+
+  input {
+    height: 25px;
+    padding-right: 30px;
+  }
+
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #desg{
+    margin-left: 90px;
+  }
+
+  h2{
+    margin-left: 350px;
+  }
+

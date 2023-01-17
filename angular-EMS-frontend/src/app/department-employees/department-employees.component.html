@@ -1,0 +1,71 @@
+<h3>{{department.dpt}} Department Data</h3>
+<div >
+    <div>
+        <label> <b> Department Id : </b></label> {{department.did}}
+    </div>
+    <div>
+        <label> <b> Department Name : </b></label> {{department.dpt}} 
+    </div>
+    
+    
+    <div >
+        <label> <b> Manager : </b></label> {{department.manager}}
+    </div>
+</div>
+
+<h3 style="margin-top: 30px;">Employees Under {{department.dpt}} Department</h3>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Employee Name </th>
+            <th> Employee Id </th>
+            <th> Designation </th>
+            <th> Email </th>
+            <th> Assign to a Project </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor = "let employee of department.eiddpt" >
+          
+               <td >
+                   {{employee.firstname}}  {{employee.lastname}}
+               </td>
+               <td>
+                 {{employee.eid}}
+               </td>
+                <td>
+                  {{employee.desg}}
+                </td>
+                <td>
+                    {{employee.email}}
+                </td>
+                <td *ngIf="isAssigned(employee.eid) == 'none';else second">
+                    <!--<input type="text"  id = "projectName" name = "projectName">-->
+                    <label for="projectName">Choose a Project : </label>
+                    <select name="projectName" id="projectName">
+                        <option *ngFor="let project of department.projects" [value]="project.projectName">
+                            {{project.projectName}}
+                          </option> 
+                    </select>
+                    <button (click)="onSubmit(employee.eid)" class = "btn btn-success" type ="submit" id="btnsubmit">Submit</button>
+                </td>
+                <ng-template #second>
+                <td  *ngIf="isAssigned(employee.eid) as pid">
+                    <ng-container *ngFor="let project of department.projects">
+                        <ng-container *ngIf="project.pid == pid">
+                            Assigned to Project {{project.projectName}}
+                        </ng-container>
+                    </ng-container>
+
+                    <select name="projectName" id="projectName">
+                        <option *ngFor="let project of department.projects" [value]="project.projectName">
+                            {{project.projectName}}
+                          </option> 
+                    </select>
+                    <button (click)="onSubmit(employee.eid)" class = "btn btn-success" type ="submit" id="btnsubmit">Submit</button>
+                </td>
+                </ng-template>
+            </tr>
+    </tbody>
+</table>

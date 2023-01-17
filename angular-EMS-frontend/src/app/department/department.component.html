@@ -1,0 +1,26 @@
+<h2> Departments List</h2>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Department Name</th>
+            <th> Department ID </th>
+            <th> Manager Name</th>
+            <th> Mananger ID </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let department of departments" >
+            <td> {{ department.dpt }} </td>
+            <td> {{ department.did }} </td>
+            <td> {{ department.manager}} </td>
+            <td> {{ department.managerID}} </td>
+            <td>
+                
+                <button (click) = "viewProjects(department.did)" class = "btn btn-info" > View Projects</button>
+                <button (click) = "viewEmployees(department.did)" class = "btn btn-info" style="margin-left: 10px;"> View Employees</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <div class="card" style="padding: 20px;">
+        <form #loginForm="ngForm" (ngSubmit)="login()">
+            <input type="text"
+            [(ngModel)]="user.eid"
+            name="eid"
+            id="eid"
+            placeholder="Enter your Employee ID"
+            class="form-control mb-3"
+            >
+
+            <input type="password"
+            [(ngModel)]="user.password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+            class="form-control mb-3"
+            >
+
+            <input type="submit"
+            value="Login"
+            class="btn btn-outline-primary form-control rounded-0">
+        </form>
+        
+    </div>
+    <h3 *ngIf="wrongCred">Wrong Credentials!! Try Again</h3>
+    
+</div>

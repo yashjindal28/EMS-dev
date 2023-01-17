@@ -1,0 +1,89 @@
+version: "3.9" 
+services:
+   go-ems-employeeservice:
+       image: yashjindal28/go-ems-employeeservice
+       build: 
+           context: ./go-EMS-employeeService
+           dockerfile: Dockerfile.dev
+       ports:
+           - "84:84"
+       container_name: go-ems-employeeservice
+       volumes:
+           - ./go-EMS-employeeService:/app
+       environment:
+           MONGO_URL: mongo:27017
+           AUTH_SERVICE_HOST: go-ems-authservice:8080
+   go-ems-authservice:
+       image: yashjindal28/go-ems-authservice
+       build: 
+           context: ./go-EMS-AuthService
+           dockerfile: Dockerfile.dev
+       ports:
+           - "8080:8080"
+       container_name: go-ems-authservice
+       volumes:
+           - ./go-EMS-AuthService:/app
+       environment:
+           MONGO_URL: mongo:27017
+   go-ems-leaveservice:
+       image: yashjindal28/go-ems-leaveservice
+       build: 
+           context: ./go-EMS-leaveService
+           dockerfile: Dockerfile.dev
+       ports:
+           - "82:82"
+       container_name: go-ems-leaveservice
+       volumes:
+           - ./go-EMS-leaveService:/app
+       environment:
+           MONGO_URL: mongo:27017
+           AUTH_SERVICE_HOST: go-ems-authservice:8080
+   go-ems-departmentservice:
+       image: yashjindal28/go-ems-departmentservice
+       build: 
+           context: ./go-EMS-departmentService
+           dockerfile: Dockerfile.dev
+       ports:
+           - "83:83"
+       container_name: go-ems-departmentservice
+       volumes:
+           - ./go-EMS-departmentService:/app
+       environment:
+           MONGO_URL: mongo:27017
+           AUTH_SERVICE_HOST: go-ems-authservice:8080
+   go-ems-payrollservice:
+       image: yashjindal28/go-ems-payrollservice
+       build: 
+           context: ./go-EMS-payrollService
+           dockerfile: dockerfile
+       ports:
+           - "81:81"
+       container_name: go-ems-payrollservice
+       volumes:
+           - ./go-EMS-payrollService:/app
+       environment:
+           MONGO_URL: mongo:27017
+           AUTH_SERVICE_HOST: go-ems-authservice:8080
+   mongo:
+       image: mongo
+       ports:
+           - "27017:27017"
+       container_name: mongo
+   angular-ems-frontend:
+       image: yashjindal28/angular-ems-frontend
+       build: 
+           context: ./angular-EMS-frontend
+           dockerfile: Dockerfile.dev
+       ports:
+           - "4201:4201"
+       container_name: angular-ems-frontend
+       volumes:
+           - /app/node_modules
+           - ./angular-EMS-frontend:/app
+       environment:
+           EMPLOYEE_HOST: localhost:84
+           LEAVE_HOST: localhost:82
+           PAYROLL_HOST: localhost:81
+           DPT_HOST: localhost:83
+           AUTH_HOST: localhost:8080
+           

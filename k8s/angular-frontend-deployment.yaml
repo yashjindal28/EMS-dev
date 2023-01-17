@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: angular-ems-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: angular-ems-frontend
+  template:
+    metadata:
+      labels:
+        component: angular-ems-frontend
+    spec:
+      containers:
+        - name: angular-ems-frontend
+          image: yashjindal28/angular-ems-frontend
+          ports:
+            - containerPort: 4201

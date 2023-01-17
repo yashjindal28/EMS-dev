@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: leaveservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: go-ems-leaveservice
+  template:
+    metadata:
+      labels:
+        component: go-ems-leaveservice
+    spec:
+      containers:
+        - name: go-ems-leaveservice
+          image: yashjindal28/go-ems-leaveservice
+          ports:
+            - containerPort: 82
+          env:
+            - name: MONGO_URL
+              value: mongo-cluster-ip-service:27017
+            - name: AUTH_SERVICE_HOST
+              value: authservice-cluster-ip-service:8080

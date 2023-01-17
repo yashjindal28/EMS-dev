@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: departmentservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: go-ems-departmentservice
+  template:
+    metadata:
+      labels:
+        component: go-ems-departmentservice
+    spec:
+      containers:
+        - name: go-ems-departmentservice
+          image: yashjindal28/go-ems-departmentservice
+          ports:
+            - containerPort: 83
+          env:
+            - name: MONGO_URL
+              value: mongo-cluster-ip-service:27017
+            - name: AUTH_SERVICE_HOST
+              value: authservice-cluster-ip-service:8080

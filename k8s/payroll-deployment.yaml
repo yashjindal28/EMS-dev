@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: payrollservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: go-ems-payrollservice
+  template:
+    metadata:
+      labels:
+        component: go-ems-payrollservice
+    spec:
+      containers:
+        - name: go-ems-payrollservice
+          image: yashjindal28/go-ems-payrollservice
+          ports:
+            - containerPort: 81
+          env:
+            - name: MONGO_URL
+              value: mongo-cluster-ip-service:27017
+            - name: AUTH_SERVICE_HOST
+              value: authservice-cluster-ip-service:8080

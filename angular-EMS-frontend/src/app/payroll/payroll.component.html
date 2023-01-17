@@ -1,0 +1,33 @@
+<h2> Payroll Service</h2>
+
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Employee ID</th>
+            <th> Employee Name </th>            
+            <th> Email Id</th>
+            <th> Manager Name </th>
+            <th> Department </th>
+            <th> Salary </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let employee of employees" >
+            <td> {{ employee.eid }} </td>
+            <td> {{ employee.firstname }} {{ employee.lastname }} </td>
+            <td> {{ employee.email }} </td>
+            <td> {{ employee.manager }} </td>
+            <td> {{ employee.dpt }} </td>
+            <td> {{ employee.salary }} </td>
+            <td *ngIf="employee.isCheckIssued == 0">
+                <button (click) = "issuePayCheck(employee.eid)" class = "btn btn-info">Issue Pay Check</button>
+            </td>
+            <td *ngIf="employee.isCheckIssued == 1">
+                Pay Check Issued
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

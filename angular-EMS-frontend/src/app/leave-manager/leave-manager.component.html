@@ -1,0 +1,36 @@
+<h2> Employee Leave Requests </h2>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Employee ID</th>
+            <th> Employee Name </th>
+            <th> Leaves Remaining</th>
+            <th> Days Requested </th>
+            <th> Duration </th>
+            <th> Reason </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor = "let employeeLeave of employeeLeaves" >
+            <ng-container *ngIf="employeeLeave.sdate.length > 0 ">
+            <td> {{ employeeLeave.eid }}</td>
+            <td> {{ employeeLeave.firstname }} {{ employeeLeave.lastname }} </td>
+            <td> {{ employeeLeave.leavesRem }} </td>
+            <td> {{ employeeLeave.daysReq }} </td>
+            <td> {{ employeeLeave.sdate }} - {{ employeeLeave.edate }} </td>
+            <td> {{ employeeLeave.reason }} </td>
+            
+            <td *ngIf="employeeLeave.pendingStatus == 1">
+                <button (click) = "approve(employeeLeave.eid)" class = "btn btn-info"> Approve</button>
+                <button (click) = "reject(employeeLeave.eid)" class = "btn btn-danger" style="margin-left: 10px"> Reject</button>
+            </td>
+            <td *ngIf="employeeLeave.pendingStatus == 0">
+                <ng-container *ngIf="employeeLeave.approved == 0"> <td > Rejected </td> </ng-container>
+                <ng-container *ngIf="employeeLeave.approved == 1"> <td > Approved </td> </ng-container>
+            </td>
+        </ng-container>
+        </tr>
+    </tbody>
+</table>

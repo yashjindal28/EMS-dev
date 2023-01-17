@@ -1,0 +1,37 @@
+
+<h2> Company Employee List </h2>
+<Div>
+    <input [(ngModel)]="enteredSearchValue" placeholder="Search" type="text">
+    <i (click)="onSubmit()" class="material-icons">search</i>
+    <input [(ngModel)]="criteriaFilter.desg" placeholder="Designation" type="text" id="desg">
+    <input [(ngModel)]="criteriaFilter.dpt" placeholder="Department" type="text">
+    <input [(ngModel)]="criteriaFilter.location" placeholder="Location" type="text">
+    <button (click) = "filter()"  class = " btn-info" style="margin-left: 10px">Submit</button>
+</Div>
+
+
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Employee ID</th>
+            <th> Employee Name </th>            
+            <th> Email Id</th>
+            <th> Manager Name </th>
+            <th> Department </th>
+            <th> Designation </th>
+            <th> Location </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let employee of employees" >
+            <td> {{ employee.eid }} </td>
+            <td> {{ employee.firstname }} {{ employee.lastname }} </td>
+            <td> {{ employee.email }} </td>
+            <td> {{ employee.manager }} </td>
+            <td> {{ employee.dpt }} </td>
+            <td> {{ employee.desg }} </td>
+            <td> {{ employee.location }} </td>
+        </tr>
+    </tbody>
+</table>
+

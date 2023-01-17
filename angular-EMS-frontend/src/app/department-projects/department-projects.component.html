@@ -1,0 +1,81 @@
+<h3> Your Department Data</h3>
+<div >
+    <div>
+        <label> <b> Department Id: </b></label> {{department.did}}
+    </div>
+    <div>
+        <label> <b> Department Name: </b></label> {{department.dpt}} 
+    </div>
+    
+    
+    <div >
+        <label> <b> Manager: </b></label> {{department.manager}}
+    </div>
+</div>
+
+<h3 style="margin-top: 30px;">Projects Under {{department.dpt}} Department</h3>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Project Name </th>
+            <th> Project Id </th>
+            <th> Project Deadline</th>
+            <th> Employees Under this Project </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor = "let project of this.department.projects" >
+          
+               <td >
+                   {{project.projectName}}
+               </td>
+               <td>
+                 {{project.pid}}
+               </td>
+                <td>
+                  {{project.deadline}}
+                </td>
+                <td>
+                    <table>
+                        <tr *ngFor="let employee of project.projectEmployees">
+                            <td>{{employee.eid}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+    </tbody>
+</table>
+
+<h3>Create a New Project</h3>
+<form  (ngSubmit)="onSubmit()">
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th> Project ID</th>
+                <th> Project Name</th>
+                <th> Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr >
+               <td>
+                    <input type="text"  id = "pid"
+                    name = "pid">
+                </td>
+                <td>
+                    <input type="text"  id = "projectName"
+                     name = "projectName">
+                </td>
+                <td>
+                    <input type="text"  id = "deadline"
+                    name = "deadline">
+                </td>
+                <td>
+                    <button class = "btn btn-success" type ="submit" id="btnsubmit">Submit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

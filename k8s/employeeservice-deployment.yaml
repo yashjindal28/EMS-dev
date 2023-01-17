@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: employeeservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: go-ems-employeeservice
+  template:
+    metadata:
+      labels:
+        component: go-ems-employeeservice
+    spec:
+      containers:
+        - name: go-ems-employeeservice
+          image: yashjindal28/go-ems-employeeservice
+          ports:
+            - containerPort: 84
+          env:
+            - name: MONGO_URL
+              value: mongo-cluster-ip-service:27017
+            - name: AUTH_SERVICE_HOST
+              value: authservice-cluster-ip-service:8080

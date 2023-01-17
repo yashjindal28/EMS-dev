@@ -1,0 +1,96 @@
+<h3> <b>Your Leave Data</b></h3>
+<div>
+    <div>
+        <label> <b> Employee Id : </b></label> {{employeeLeaveData.eid}}
+    </div>
+    <div>
+        <label> <b> Employee Name : </b></label> {{employeeLeaveData.firstname}}  {{employeeLeaveData.lastname}}
+    </div>
+    
+    
+    <div>
+        <label> <b> Manager : </b></label> {{employeeLeaveData.manager}}
+    </div>
+    <div>
+        <label> <b> Remaining Leave Balance : </b></label> {{employeeLeaveData.leavesRem}}  
+    </div>
+   
+</div>
+
+<br>
+<br>
+<h3> <b>Your Leave History </b></h3>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> Starting Date </th>
+            <th> Ending Date </th>
+            <th> Days Requested</th>
+            <th> Reason </th>
+            <th> Status </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr >
+           <td>
+            {{employeeLeaveData.sdate}}
+            </td>
+            <td>
+                {{employeeLeaveData.edate}}
+            </td>
+            <td>
+                {{employeeLeaveData.daysReq}}
+            </td>
+            <td>
+                {{employeeLeaveData.reason}}
+            </td>
+            <td *ngIf="employeeLeaveData.pendingStatus == 1">
+                Waiting for Approval
+            </td>
+            <td *ngIf="employeeLeaveData.pendingStatus == 0">
+                <ng-container *ngIf="employeeLeaveData.approved == 0"> <td > Rejected </td> </ng-container>
+                <ng-container *ngIf="employeeLeaveData.approved == 1"> <td > Approved </td> </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<h3><b>Initiate a new leave Request</b></h3>
+<form  (ngSubmit)="onSubmit()">
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th> Starting Date (dd/mm/yyyy)</th>
+                <th> Ending Date (dd/mm/yyyy) </th>
+                <th> Total Days</th>
+                <th> Reason </th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr >
+               <td>
+                    <input type="text"  id = "sdate"
+                    name = "sdate">
+                </td>
+                <td>
+                    <input type="text"  id = "edate"
+                     name = "edate">
+                </td>
+                <td>
+                    <input type="number"  id = "daysReq"
+                    name = "daysReq">
+                </td>
+                <td>
+                    <input type="text"  id = "reason"
+                    name = "reason">
+                </td>
+                <td>
+                    <button class = "btn btn-success" type ="submit" id="btnsubmit">Submit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
